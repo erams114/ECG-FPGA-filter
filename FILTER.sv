@@ -1,11 +1,9 @@
 module FILTER #(parameter DATAWIDTH=64, ORDER=41, COEFFDATAWIDTH=32)
                     (output logic signed [DATAWIDTH-1:0] FiltOut,  // Single output
                      input logic signed [DATAWIDTH-1:0] FiltIn,
-                     input logic Clk, nRst
-					 //input logic rx,         // UART RX line
-					 //output logic tx,        // UART TX line
-					 //output logic [7:0] led
-                    );
+					 output logic tx,        // UART TX line
+					 output logic [7:0] led,
+                     input logic Clk, nRst, rx);
 
     // Low-pass filter coefficients
     logic signed [COEFFDATAWIDTH-1:0] CoefficientsLow [0:ORDER-1] = 
@@ -44,9 +42,8 @@ module FILTER #(parameter DATAWIDTH=64, ORDER=41, COEFFDATAWIDTH=32)
         .Clk(Clk),
         .nRst(nRst)
     );
-
-//UART program
-    /*logic [7:0] rx_data;
+	
+    logic [7:0] rx_data;
     logic rx_ready;
     logic tx_busy;
     logic tx_start;
@@ -59,7 +56,7 @@ module FILTER #(parameter DATAWIDTH=64, ORDER=41, COEFFDATAWIDTH=32)
         .rx(rx),
         .rx_data(rx_data),
         .rx_ready(rx_ready)
-    ); 
+    );
 
     // Instantiate UART Transmitter
     TX uart_tx(
@@ -81,5 +78,5 @@ module FILTER #(parameter DATAWIDTH=64, ORDER=41, COEFFDATAWIDTH=32)
         end
     end
 
-    assign led = rx_data; // Show received data on LEDs*/
+    assign led = rx_data;
 endmodule
