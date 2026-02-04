@@ -68,7 +68,6 @@ module FILTER #(parameter DATAWIDTH=64, ORDER=41, COEFFDATAWIDTH=32)
         .tx_busy(tx_busy)
     );
 
-    // Loopback logic: Transmit received data
     always_ff @(posedge Clk) begin
         if (rx_ready && !tx_busy) begin
             tx_data <= rx_data;
@@ -79,4 +78,5 @@ module FILTER #(parameter DATAWIDTH=64, ORDER=41, COEFFDATAWIDTH=32)
     end
 
     assign led = rx_data;
+
 endmodule
