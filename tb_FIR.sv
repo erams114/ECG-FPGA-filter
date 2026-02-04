@@ -1,6 +1,6 @@
 `timescale 1ns/100ps
 
-`define PERIOD 10 //clock period
+`define PERIOD 10 // Clock period
 `define DATAWIDTH 64
 `define ORDER 41
 `define COEFFDATAWIDTH 32
@@ -32,22 +32,22 @@ module tb_FIR;
     // Store the output in the file
     always @(posedge Clk) 
     begin
-        $fwrite(ptrFileWrite, "%d\n", FiltOut); //store the value of out in file
+		$fwrite(ptrFileWrite, "%d\n", FiltOut); 
     end
 
     // Main test
     initial 
     begin
-        ptrFileWrite = $fopen("OutputSignal.txt","w"); //Create output file
-        ptrFileRead = $fopen("InputSignal.txt","r"); //Open input file
+        ptrFileWrite = $fopen("OutputSignal.txt","w");
+        ptrFileRead = $fopen("InputSignal.txt","r"); 
         
-        //Reset
+        // Reset
         nRst = 1'b0;
         FiltIn = '0;
         #1
         nRst = 1'b1;
 
-        //Read inputs
+        // Read inputs
         while(!$feof(ptrFileRead))
         begin
             void'($fscanf(ptrFileRead, "%d", FiltIn));
@@ -65,4 +65,5 @@ module tb_FIR;
     end    
 
 endmodule
+
 
