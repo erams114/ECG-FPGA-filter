@@ -1,8 +1,8 @@
 module UART( 
     input wire Clk,          
-    input wire nRst,         // Reset
-    input logic rx,         // UART RX line
-    output logic tx,        // UART TX line
+    input wire nRst,  
+    input logic rx, 
+    output logic tx, 
     output logic [7:0] led  // LED output to show received data
 );
 
@@ -31,7 +31,7 @@ module UART(
         .tx_busy(tx_busy)
     );
 
-    // Loopback logic: Transmit received data
+    // Transmit received data
     always_ff @(posedge Clk) begin
         if (rx_ready && !tx_busy) begin
             tx_data <= rx_data;
@@ -41,6 +41,7 @@ module UART(
         end
     end
 
-    assign led = rx_data; // Show received data on LEDs
+    assign led = rx_data; 
 
 endmodule
+
