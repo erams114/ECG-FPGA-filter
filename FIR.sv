@@ -5,13 +5,13 @@ module FIR #(parameter DATAWIDTH=64, ORDER=41, COEFFDATAWIDTH=32)
              input logic Clk, nRst
             );
   
-    logic signed [DATAWIDTH-1:0] Taps [ORDER]; //Extra tap to also store the current input value. 
+	logic signed [DATAWIDTH-1:0] Taps [ORDER]; // Extra tap to also store the current input value. 
     logic signed [DATAWIDTH-1:0] Products [ORDER];
     logic signed [DATAWIDTH-1:0] Sum;
 
     assign FiltOut = Sum >>> 31; // Assign the output
 
-    // Async. reset
+    // Async reset
     always @(posedge Clk, negedge nRst)
     begin
         if(!nRst)
@@ -41,6 +41,7 @@ module FIR #(parameter DATAWIDTH=64, ORDER=41, COEFFDATAWIDTH=32)
     end
 
     
+
 
 
 endmodule
